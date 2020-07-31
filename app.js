@@ -36,32 +36,23 @@ function videoDetails(video) {
 //     })
 // });
 
-// loginUser('ed', 'bumba')
-//     .then(user => getUserVideos(user.email))
-//     .then(videos => videoDetails(videos[0]))
-//     .then(detail => console.log(detail));
+loginUser('ed', 'bumba')
+    .then(user => getUserVideos(user.email))
+    .then(videos => videoDetails(videos[0]))
+    .then(detail => console.log(detail));
 
 
 // // Synchronous style (wouldn't it be nice??)
-
+async function displayUser() {
+    try {
+        const loggedUser = await loginUser('edmail', 1235);
+        const videos = await getUserVideos(loggedUser.userEmail);
+        const detail = await videoDetails(videos[0]);
+        console.log(detail);
+    } catch (err) {
+        console.log("We could not get the videos");
+    }
+}
 
 // console.log('Finish');
 
-const yt = new Promise(resolve => {
-    setTimeout(() => {
-        console.log('getting stuff from youtube');
-        resolve({ videos: [1, 2, 3, 4, 5] });
-    }, 5000);
-})
-
-const fb = new Promise(resolve => {
-    setTimeout(() => {
-        console.log('stuff from facebook');
-        resolve({ user: 'Name' });
-    }, 2000);
-})
-
-Promise.all([yt, fb])
-    .then(result => {
-        console.log(result);
-    })
