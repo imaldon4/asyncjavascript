@@ -37,6 +37,8 @@ function videoDetails(video) {
 // });
 
 loginUser('ed', 'bumba')
-    .then(user => console.log(user));
+    .then(user => getUserVideos(user.email))
+    .then(videos => videoDetails(videos[0]))
+    .then(detail => console.log(detail));
 
 console.log('Finish');
